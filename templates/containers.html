@@ -13,7 +13,7 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Container List</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Container Active</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -34,11 +34,14 @@
                         <tr>
                             <td>{{ container.name }}</td>
                             <!-- <td>{{ container.id }}</td> -->
-                            <td>{{ container.status }}</td>
+                            <td><div class="badge badge-info">{{ container.status }}</div></td>
                             <td>{{ container.attrs['NetworkSettings']['IPAddress'] }}</td>
                             <td>{{ container.attrs['Config']['Image'] }}</td>
                             <td>{{ container.attrs['Config']['ExposedPorts'] }}</td>
-                            <td></td>
+                            <td>
+                                <a href="container/{{ container.id }}/restart" class="btn btn-success"><i class="fas fa-play"></i> Restart</a>
+                                <a href="container/{{ container.id }}/stop" class="btn btn-danger"><i class="fa fa-stop-circle"></i> Stop</a>
+                            </td>
                         </tr>
                         {% endfor %}
                         
