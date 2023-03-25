@@ -1,13 +1,26 @@
 import docker
-from flask import Flask, jsonify, render_template, url_for, redirect, request
+from flask import Flask, url_for, render_template
+import jinja2.exceptions
 
 app = Flask(__name__)
 client = docker.from_env()
 
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 @app.route('/containers')
 def containers():
     containers = client.containers.list()
+    return render_template('containers.html', containers=containers)
+    # return jsonify([c.name for c in containers])
+
+
+@app.route('/containers/all')
+def containers_all():
+    containers = client.containers.list(all=True)
     return jsonify([c.name for c in containers])
 
 
@@ -41,6 +54,16 @@ def remove_volume(volume_name):
     volume = client.volumes.get(volume_name)
     volume.remove()
     return 'Volume telah dihapus'
+
+
+@app.errorhandler(jinja2.exceptions.TemplateNotFound)
+def template_not_found(e):
+    return not_found(e)
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html')
 
 
 if __name__ == '__main__':
