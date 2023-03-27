@@ -21,6 +21,7 @@ def containers():
 @app.route('/containers/all')
 def containers_all():
     containers = client.containers.list(all=True)
+    return render_template('containers_all.html', containers=containers)
     return jsonify([c.name for c in containers])
 
 

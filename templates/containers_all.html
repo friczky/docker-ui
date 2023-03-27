@@ -34,7 +34,13 @@
                         <tr>
                             <td><a href="containers/{{ container.id }}">{{ container.name }}</a></td>
                             <!-- <td>{{ container.id }}</td> -->
-                            <td><div class="badge badge-info">{{ container.status }}</div></td>
+                            <td>
+                                {% if container.status == "running": %}
+                                <div class="badge badge-success">running</div>
+                                {% else %}
+                                <div class="badge badge-danger">exited</div>
+                                {% endif %}
+                            </td>
                             <td>{{ container.attrs['NetworkSettings']['IPAddress'] }}</td>
                             <td>{{ container.attrs['Config']['Image'] }}</td>
                             <td>{{ container.attrs['Config']['ExposedPorts'] }}</td>
