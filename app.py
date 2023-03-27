@@ -1,5 +1,5 @@
 import docker
-from flask import Flask, url_for, render_template
+from flask import Flask, url_for, render_template, jsonify
 import jinja2.exceptions
 
 app = Flask(__name__)
@@ -22,6 +22,12 @@ def containers():
 def containers_all():
     containers = client.containers.list(all=True)
     return jsonify([c.name for c in containers])
+
+
+@app.route('/containers/<container_id>')
+def container(container_id):
+    container = client.containers.get(container_id)
+    return render_template('containers_details.html', container=container)
 
 
 @app.route('/containers/create')

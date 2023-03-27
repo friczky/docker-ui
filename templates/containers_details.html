@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block title %}Sample{% endblock %}
+{% block content %}
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Detail Container</h1>
+    <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more
+        information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official
+            DataTables documentation</a>.</p> -->
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="col-sm-12 row">
+                <div class="col-sm-6">
+                    <h3 class="m-0 font-weight-bold text-primary">Container : {{ container.name }}</h3>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a href="" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> Rename</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="">Name</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{ container.name }}" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">Image Name</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{ container.image }}" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">ID</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{ container.id }}" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">Ports</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{ container.attrs['Config']['ExposedPorts'] }}" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="">Ports</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" value="{{ container.attrs['Config']['ExposedPorts'] }}" disabled>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+{% endblock %}
+
+{% block js %}
+{{ super() }}
+<!-- Page level plugins -->
+<script src="{{ url_for('static', filename='vendor/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ url_for('static', filename='vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ url_for('static', filename='js/demo/datatables-demo.js')}}"></script>
+{% endblock %}
